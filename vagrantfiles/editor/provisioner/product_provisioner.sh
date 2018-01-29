@@ -23,7 +23,7 @@ NODE_IP=$(/sbin/ifconfig eth1 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $
 
 # copy files with configuration changes
 echo "Copying the files with configuration changes to the server pack..."
-cp -TRv ${CONFIGURATIONS}/repository/conf/ ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/wso2/business-process/conf/
+cp -TRv ${CONFIGURATIONS}/repository/conf/ ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/wso2/editor/conf/
 if [ "$?" -eq "0" ];
 then
   echo "Successfully copied the configuration files."
@@ -31,7 +31,7 @@ else
   echo "Failed to copy the configuration files"
 fi
 
-cp -TRv ${CONFIGURATIONS}/repository/deployment/server/ ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/wso2/business-process/repository/deployment/server/
+cp -TRv ${CONFIGURATIONS}/repository/deployment/server/ ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/wso2/editor/deployment/server/
 if [ "$?" -eq "0" ];
 then
   echo "Successfully copied the deployment Server files."
@@ -42,13 +42,13 @@ fi
 export JAVA_HOME
 
 # start the WSO2 product pack as a background service
-echo "Starting ${WSO2_SERVER}-${WSO2_SERVER_VERSION}-business-process..."
-sh ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/wso2/business-process/bin/wso2server.sh start
+echo "Starting ${WSO2_SERVER}-${WSO2_SERVER_VERSION}-editor..."
+sh ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/wso2/editor/bin/carbon.sh start
 
 sleep 10
 
 # tail the WSO2 product server startup logs until the server startup confirmation is logged
-tail -f ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/wso2/business-process/repository/logs/wso2carbon.log | while read LOG_LINE
+tail -f ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/wso2/editor/logs/wso2carbon.log | while read LOG_LINE
 do
   # echo each log line
   echo "${LOG_LINE}"
