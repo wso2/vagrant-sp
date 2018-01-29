@@ -1,8 +1,8 @@
 CREATE Database `stats_db`;
 
-CREATE Database `apimgt_db`;
+CREATE Database `sp_db`;
 
-USE `apimgt_db`;
+USE `sp_db`;
 
 CREATE TABLE IF NOT EXISTS REG_CLUSTER_LOCK (
              REG_LOCK_NAME VARCHAR (20),
