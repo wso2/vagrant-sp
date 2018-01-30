@@ -20,7 +20,7 @@ git clone https://github.com/wso2/vagrant-sp.git
 
     cd vagrantfiles
 
-**The WSO2 SP considers 4 profiles. Following are the 4 profiles**
+**Following are the WSO2 Stream Processor profiles**
 
   1. Dashboard
   2. Editor
