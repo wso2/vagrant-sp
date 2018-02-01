@@ -23,10 +23,10 @@ Virtualization should be enabled in the BIOS before building the boxes.
 	~/vagrantboxes/files/
 ```
 
-3. Move to `vagrantboxes` folder.
+3. Move to `boxes` folder.
 
 ```
-	cd vagrantboxes
+	cd boxes
 ```
 
 4. Execute the build.sh shell script.
