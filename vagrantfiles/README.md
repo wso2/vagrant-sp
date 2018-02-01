@@ -11,14 +11,18 @@ Virtualization should be enabled in BIOS settings before building the boxes.
 ## How to run the Vagrantfile
 
 1. Checkout this repository into your local machine using the following Git command.
+
 ```
-git clone https://github.com/wso2/vagrant-sp.git
+    git clone https://github.com/wso2/vagrant-sp.git
 ```
+
 2. Build and add the Vagrant boxes for external MySQL database and WSO2 Stream Processor using the Vagrantboxes resources.
 
 3. Move to `vagrantfiles` folder.
 
+```
     cd vagrantfiles
+```
 
 **Following are the WSO2 Stream Processor profiles**
 
@@ -33,27 +37,36 @@ git clone https://github.com/wso2/vagrant-sp.git
 
 Move to `dashboard` folder.
 
+```
     cd dashboard
+```
 
 ### Editor profile
 
  Move to `editor` folder.
 
+```
     cd editor
+```
 
 ### Manager profile
 
  Move to `manager` folder.
 
+```
     cd manager
+```
 
 ### Worker profile
 
  Move to `worker` folder.
 
+```
     cd worker
-
+```
 
 ### Run the selected profile using the following command.
 
+```
     vagrant up
+```
