@@ -14,7 +14,7 @@ Virtualization should be enabled in the BIOS before building the boxes.
 1. Checkout this repository into your local machine using the following Git command.
 
 ```
-git clone https://github.com/wso2/vagrant-sp.git
+	git clone https://github.com/wso2/vagrant-sp.git
 ```
 2. Download
 	[WSO2 Stream Processor 4.0.0](https://wso2.com/analytics#download), [JDK 8u144-linux-x64.tar](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/) and copy them to the following path.
