@@ -34,7 +34,6 @@ do
   # echo each log line
   echo "${LOG_LINE}"
   # once the log line with WSO2 Carbon server start confirmation was logged, kill the started tail process
-  [[ "${LOG_LINE}" == *"WSO2 Carbon started"* ]] && pkill tail
+  [[ "${LOG_LINE}" == *"Successfully deployed Agent Server"* ]] && pkill tail
 done
 
-echo "Management console URL: https://${NODE_IP}:9090/carbon"
