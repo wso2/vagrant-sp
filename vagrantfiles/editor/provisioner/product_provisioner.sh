@@ -18,9 +18,21 @@ WSO2_SERVER_VERSION=4.0.0
 WORKING_DIRECTORY=/home/vagrant
 JAVA_HOME=/opt/java/
 DEFAULT_MOUNT=/vagrant
+CONFIGURATIONS=${DEFAULT_MOUNT}/
 NODE_IP=$(/sbin/ifconfig eth1 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
 
 export JAVA_HOME
+
+# copy files with configuration changes
+echo "Copying the files with configuration changes to the server pack..."
+
+cp -TRv ${CONFIGURATIONS}/repository/conf/ ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/conf/editor/
+if [ "$?" -eq "0" ];
+then
+  echo "Successfully copied the configuration files."
+else
+  echo "Failed to copy the configuration files"
+fi
 
 # start the WSO2 product pack as a background service
 echo "Starting ${WSO2_SERVER}-${WSO2_SERVER_VERSION}..."
@@ -37,4 +49,4 @@ do
   [[ "${LOG_LINE}" == *"WSO2 Carbon started"* ]] && pkill tail
 done
 
-echo "Management console URL: https://${NODE_IP}:9443/carbon"
+echo "Management console URL: https://${NODE_IP}:9390/carbon"
