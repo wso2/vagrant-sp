@@ -1,8 +1,8 @@
 # Vagrantfile for WSO2 Stream Processor
 
-This section defines the procedure to execute run Vagrant resources for a specific profile of the WSO2 Stream Processor.
+This section defines the procedure to run Vagrant resources for a specific profile of the WSO2 Stream Processor.
 
-Please note that in order to run these Vagrant resources use, you need to install
+Please note that in order to run these Vagrant resources, you need to install
 [Oracle VM VirtualBox](http://www.oracle.com/technetwork/server-storage/virtualbox/downloads/index.html),
 as Vagrant uses Oracle VM VirtualBox as the default provider.
 
