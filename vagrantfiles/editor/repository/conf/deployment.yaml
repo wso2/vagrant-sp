@@ -44,7 +44,7 @@ wso2.transport.http:
       port: 9390
     -
       id: "msf4j-https"
-      host: "0.0.0.0"
+      host: "172.28.128.5"
       port: 9743
       scheme: https
       keyStoreFile: "${carbon.home}/resources/security/wso2carbon.jks"
