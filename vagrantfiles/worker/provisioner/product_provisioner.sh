@@ -20,6 +20,23 @@ JAVA_HOME=/opt/java/
 DEFAULT_MOUNT=/vagrant
 NODE_IP=$(/sbin/ifconfig eth1 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
 
+# unpack the WSO2 product pack to the working directory
+echo "Setting up the ${WSO2_SERVER}-${WSO2_SERVER_VERSION} server..."
+if test ! -d ${WSO2_SERVER}-${WSO2_SERVER_VERSION}; then
+  unzip -q ${WORKING_DIRECTORY}/${WSO2_SERVER_PACK} -d ${WORKING_DIRECTORY}
+fi
+echo "Successfully set up ${WSO2_SERVER}-${WSO2_SERVER_VERSION} server"
+
+# add the MySQL driver
+echo "Copying the MySQL driver to the server pack..."
+cp ${WORKING_DIRECTORY}/${MYSQL_CONNECTOR} ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/lib/${MYSQL_CONNECTOR}
+if [ "$?" -eq "0" ];
+then
+  echo "Successfully copied the MySQL driver to the server pack."
+else
+  echo "Failed to copy the MySQL driver to the server pack."
+fi
+
 export JAVA_HOME
 
 # start the WSO2 product pack as a background service
@@ -36,4 +53,3 @@ do
   # once the log line with WSO2 Carbon server start confirmation was logged, kill the started tail process
   [[ "${LOG_LINE}" == *"Successfully deployed Agent Server"* ]] && pkill tail
 done
-
