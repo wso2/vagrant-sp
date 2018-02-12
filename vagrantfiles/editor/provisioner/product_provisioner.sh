@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Copyright 2018 WSO2, Inc. (http://wso2.com)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +16,30 @@
 # set variables
 WSO2_SERVER=wso2sp
 WSO2_SERVER_VERSION=4.0.0
+WSO2_SERVER_PACK=${WSO2_SERVER}-${WSO2_SERVER_VERSION}*.zip
+MYSQL_CONNECTOR=mysql-connector-java-5.1.*-bin.jar
 WORKING_DIRECTORY=/home/vagrant
 JAVA_HOME=/opt/java/
 DEFAULT_MOUNT=/vagrant
 CONFIGURATIONS=${DEFAULT_MOUNT}/
 NODE_IP=$(/sbin/ifconfig eth1 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
+
+# unpack the WSO2 product pack to the working directory
+echo "Setting up the ${WSO2_SERVER}-${WSO2_SERVER_VERSION} server..."
+if test ! -d ${WSO2_SERVER}-${WSO2_SERVER_VERSION}; then
+  unzip -q ${WORKING_DIRECTORY}/${WSO2_SERVER_PACK} -d ${WORKING_DIRECTORY}
+fi
+echo "Successfully set up ${WSO2_SERVER}-${WSO2_SERVER_VERSION} server"
+
+# add the MySQL driver
+echo "Copying the MySQL driver to the server pack..."
+cp ${WORKING_DIRECTORY}/${MYSQL_CONNECTOR} ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/lib/${MYSQL_CONNECTOR}
+if [ "$?" -eq "0" ];
+then
+  echo "Successfully copied the MySQL driver to the server pack."
+else
+  echo "Failed to copy the MySQL driver to the server pack."
+fi
 
 # copy files with configuration changes
 echo "Copying the files with configuration changes to the server pack..."
@@ -51,4 +71,3 @@ do
 done
 
 echo "Editor Started on : http://${NODE_IP}:9390/editor"
-
