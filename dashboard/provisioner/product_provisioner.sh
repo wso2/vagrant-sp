@@ -68,4 +68,3 @@ do
   # once the log line with WSO2 Carbon server start confirmation was logged, kill the started tail process
   [[ "${LOG_LINE}" == *"WSO2 Carbon started"* ]] && pkill tail
 done
-

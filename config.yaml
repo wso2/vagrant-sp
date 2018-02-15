@@ -49,3 +49,4 @@ servers:
     ram: 2048
     cpu: 1
     provisioner_script: dashboard/provisioner/product_provisioner.sh
+    

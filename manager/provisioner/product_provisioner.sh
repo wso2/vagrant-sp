@@ -75,4 +75,3 @@ echo "Starting ${WSO2_SERVER}-${WSO2_SERVER_VERSION}..."
 nohup ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/wso2/manager/bin/carbon.sh &
 
 sleep 10
-
