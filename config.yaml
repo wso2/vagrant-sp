@@ -21,7 +21,6 @@ servers:
     ram: 2048
     cpu: 1
     provisioner_script: mysql/provisioner/db_provisioner.sh
-    
   -
     hostname: kafka
     box: wso2sp
@@ -36,7 +35,6 @@ servers:
     ram: 2048
     cpu: 1
     provisioner_script: manager/provisioner/product_provisioner.sh    
-  
   -
     hostname: worker
     box: wso2sp
@@ -44,7 +42,6 @@ servers:
     ram: 2048
     cpu: 1
     provisioner_script: worker/provisioner/product_provisioner.sh
-
   -
     hostname: dashboard
     box: wso2sp
