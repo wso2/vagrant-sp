@@ -14,7 +14,6 @@
 -- limitations under the License.
 -- 
 create database WSO2_METRICS_DB;
-create database sp_mgt_db;
 use WSO2_METRICS_DB;
 
 CREATE TABLE IF NOT EXISTS METRIC_GAUGE (
