@@ -18,12 +18,26 @@ WORKING_DIRECTORY=/home/vagrant
 JAVA_HOME=/opt/java/
 DEFAULT_MOUNT=/vagrant
 CONFIGURATIONS=${DEFAULT_MOUNT}/
+JDK_ARCHIVE=jdk-8u*-linux-x64.tar.gz
+
+# install utility software
+echo "Installing software utilities."
+apt-get install unzip
+echo "Successfully installed software utilities."
 
 # unpack the WSO2 product pack to the working directory
 echo "Setting up the kafka server..."
 tar xvzf kafka_2.11-0.10.0.0.tgz
 
 echo "Successfully set up Kafka Server"
+
+#setting up Java
+echo "Setting up Java."
+if test ! -d ${JAVA_HOME}; then
+  mkdir ${JAVA_HOME};
+  tar -xf ${WORKING_DIRECTORY}/${JDK_ARCHIVE} -C ${JAVA_HOME} --strip-components=1
+  echo "Successfully set up Java"
+fi
 
 export JAVA_HOME
 
