@@ -28,6 +28,9 @@ DEFAULT_MOUNT=/vagrant
 CONFIGURATIONS=${DEFAULT_MOUNT}/
 NODE_IP=$(/sbin/ifconfig eth1 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
 
+# operating in non-interactive mode
+export DEBIAN_FRONTEND=noninteractive
+
 # install utility software
 echo "Installing software utilities."
 apt-get install unzip
@@ -78,7 +81,7 @@ else
 fi
 
 export JAVA_HOME
-export
+export WUM_PATH
 
 # start the WSO2 product pack as a background service
 echo "Starting ${WSO2_SERVER}-${WSO2_SERVER_VERSION}..."
@@ -92,5 +95,5 @@ do
   # echo each log line
   echo "${LOG_LINE}"
   # once the log line with WSO2 Carbon server start confirmation was logged, kill the started tail process
-  [[ "${LOG_LINE}" == *"WSO2 Carbon started"* ]] && pkill tail
+  [[ "${LOG_LINE}" == *"WSO2 Stream Processor started"* ]] && pkill tail
 done

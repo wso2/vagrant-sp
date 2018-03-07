@@ -27,6 +27,9 @@ DEFAULT_MOUNT=/vagrant
 CONFIGURATIONS=${DEFAULT_MOUNT}/
 NODE_IP=$(/sbin/ifconfig eth1 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
 
+# operating in non-interactive mode
+export DEBIAN_FRONTEND=noninteractive
+
 # install utility software
 echo "Installing software utilities."
 apt-get install unzip
@@ -68,7 +71,7 @@ fi
 # copy files with configuration changes
 echo "Copying the files with configuration changes to the server pack..."
 
-cp -TRv ${CONFIGURATIONS}/manager/repository/conf/ ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/conf/manager
+cp -TRv ${CONFIGURATIONS}/editor/repository/conf/ ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/conf/editor
 if [ "$?" -eq "0" ];
 then
   echo "Successfully copied the configuration files."
@@ -76,28 +79,11 @@ else
   echo "Failed to copy the configuration files"
 fi
 
-# copy kafka jars
-echo "Copying the kafka jars to the server pack..."
-
-cp -TRv ${WORKING_DIRECTORY}/kafka-osgi/kafka_2.11_0.10.0.0_1.0.0.jar ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/lib/kafka_2.11_0.10.0.0_1.0.0.jar
-cp -TRv ${WORKING_DIRECTORY}/kafka-osgi/kafka_clients_0.10.0.0_1.0.0.jar ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/lib/kafka_clients_0.10.0.0_1.0.0.jar
-cp -TRv ${WORKING_DIRECTORY}/kafka-osgi/metrics_core_2.2.0_1.0.0.jar ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/lib/metrics_core_2.2.0_1.0.0.jar
-cp -TRv ${WORKING_DIRECTORY}/kafka-osgi/scala_library_2.11.8_1.0.0.jar ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/lib/scala_library_2.11.8_1.0.0.jar
-cp -TRv ${WORKING_DIRECTORY}/kafka-osgi/scala_parser_combinators_2.11_1.0.4_1.0.0.jar ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/lib/scala_parser_combinators_2.11_1.0.4_1.0.0.jar
-cp -TRv ${WORKING_DIRECTORY}/kafka-osgi/zkclient_0.8_1.0.0.jar ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/lib/zkclient_0.8_1.0.0.jar
-cp -TRv ${WORKING_DIRECTORY}/kafka-osgi/zookeeper_3.4.6_1.0.0.jar ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/lib/zookeeper_3.4.6_1.0.0.jar
-if [ "$?" -eq "0" ];
-then
-  echo "Successfully copied the kafka jar files."
-else
-  echo "Failed to copy the kafka jar files"
-fi
-
 export JAVA_HOME
-export WUM_HOME
+export WUM_PATH
 
 # start the WSO2 product pack as a background service
 echo "Starting ${WSO2_SERVER}-${WSO2_SERVER_VERSION}..."
-nohup ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/wso2/manager/bin/carbon.sh &
+nohup ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/bin/editor.sh &
 
 sleep 10

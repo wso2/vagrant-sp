@@ -23,7 +23,7 @@ wso2.carbon:
     # ports used by this server
   ports:
       # port offset
-    offset: 1
+    offset: 3
 
 wso2.transport.http:
   transportProperties:
@@ -40,12 +40,12 @@ wso2.transport.http:
   listenerConfigurations:
     -
       id: "default"
-      host: "172.28.128.5"
-      port: 9190
+      host: "172.28.128.7"
+      port: 9390
     -
       id: "msf4j-https"
-      host: "172.28.128.5"
-      port: 9543
+      host: "172.28.128.7"
+      port: 9743
       scheme: https
       keyStoreFile: "${carbon.home}/resources/security/wso2carbon.jks"
       keyStorePassword: wso2carbon
@@ -210,7 +210,7 @@ data.agent.config:
   # Deployment configuration parameters
 wso2.artifact.deployment:
     # Scheduler update interval
-  updateInterval: 5
+  updateInterval: 2
 
   # Periodic Persistence Configuration
 state.persistence:
@@ -233,17 +233,16 @@ wso2.securevault:
     type: org.wso2.carbon.secvault.reader.DefaultMasterKeyReader
     parameters:
       masterKeyReaderFile: ${sys:carbon.home}/conf/${sys:wso2.runtime}/master-keys.yaml
+
+  # Datasource Configurations
 wso2.datasources:
   dataSources:
-  - name: WSO2_PERMISSIONS_DB
-    description: The datasource used for permission feature
-    jndiConfig:
-      name: jdbc/PERMISSION_DB
-      useJndiReference: true
+  - name: WSO2_CARBON_DB
+    description: The datasource used for registry and user manager
     definition:
       type: RDBMS
       configuration:
-        jdbcUrl: 'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/PERMISSION_DB;IFEXISTS=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000;MVCC=TRUE'
+        jdbcUrl: 'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/WSO2_CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000'
         username: wso2carbon
         password: wso2carbon
         driverClassName: org.h2.Driver
@@ -253,47 +252,18 @@ wso2.datasources:
         validationTimeout: 30000
         isAutoCommit: false
 
-  - name: SP_MGT_DB
-    description: The MySQL datasource used for Cluster Coordination
-    # JNDI mapping of a data source
-    jndiConfig:
-       name: jdbc/SP_MGT_DB
-    # data source definition
-    definition:
-       # data source type
-       type: RDBMS
-       # data source configuration
-       configuration:
-         jdbcUrl: 'jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/SP_MGT_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000'
-         username: wso2carbon
-         password: wso2carbon
-         driverClassName: org.h2.Driver
-         maxPoolSize: 50
-         idleTimeout: 60000
-         connectionTestQuery: SELECT 1
-         validationTimeout: 30000
-         isAutoCommit: false
-
   # Cluster Configuration
 cluster.config:
   enabled: false
   groupId:  sp
   coordinationStrategyClass: org.wso2.carbon.cluster.coordinator.rdbms.RDBMSCoordinationStrategy
   strategyConfig:
-    datasource: SP_MGT_DB     # define a mysql datasource configured to the shared database
-    heartbeatInterval: 500
-    heartbeatMaxRetry: 4
+    datasource: WSO2_CARBON_DB
+    heartbeatInterval: 1000
+    heartbeatMaxRetry: 2
     eventPollingInterval: 1000
 
-  # Deployment Configuration for Distributed Deployment
-deployment.config:
-  type: distributed
-  httpInterface:
-    host: 172.28.128.5
-    port: 9190
-  heartbeatInterval: 2000
-  heartbeatMaxRetry: 4
-  datasource: SP_MGT_DB           # define a mysql datasource in datasources and refer it from here.
-  minResourceCount: 1
-  bootstrapURLs: 172.28.128.8:9092   # kafka urls
-  zooKeeperURLs: 172.28.128.8:2181   # zookeeper urls
+    #Authentication Configurations: Authentication is disabled in editor profile
+auth.configs:
+  restAPIAuthConfigs:
+    authEnable: false
