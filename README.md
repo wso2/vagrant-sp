@@ -45,5 +45,5 @@ Virtualization should be enabled in BIOS settings before building the boxes.
 
 ```
     http://localhost:9390/editor
-    https://localhost:9643/monitoring
+    https://localhost:9743/monitoring
 ```
