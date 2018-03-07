@@ -17,7 +17,7 @@ Virtualization should be enabled in BIOS settings before building the boxes.
 
 ## How to run the Vagrantfile
 
-1. Follow the instructions in this repository to build the WSO2 Stream Processor 4.0.0 and MySQL Vagrant boxes.
+1.  Follow the instructions in this repository to build the WSO2 Stream Processor 4.0.0 and MYSQL Vagrant boxes.
 
 ```
     https://github.com/wso2/vagrant-boxes
@@ -41,8 +41,9 @@ Virtualization should be enabled in BIOS settings before building the boxes.
     vagrant up
 ```
 
-5. Access the status dashboard via the given URL
+5. Access the Status Dashboard and Editor via the given URL
 
 ```
+    http://172.28.128.7:9390/editor
     https://172.28.128.6:9643/monitoring
 ```
