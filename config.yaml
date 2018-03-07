@@ -42,7 +42,7 @@ servers:
     box: wso2sp
     ip: 172.28.128.6
     ports:
-      - 9643
+      - 9743
     ram: 2048
     cpu: 1
     provisioner_script: dashboard/provisioner/product_provisioner.sh
