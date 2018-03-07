@@ -25,6 +25,9 @@ servers:
     hostname: editor
     box: wso2sp
     ip: 172.28.128.7
+    ports:
+      - 9390
+      - 9743
     ram: 2048
     cpu: 1
     provisioner_script: editor/provisioner/product_provisioner.sh
@@ -39,8 +42,9 @@ servers:
     hostname: dashboard
     box: wso2sp
     ip: 172.28.128.6
+    ports:
+      - 9290
+      - 9643
     ram: 2048
     cpu: 1
     provisioner_script: dashboard/provisioner/product_provisioner.sh
-
-    
