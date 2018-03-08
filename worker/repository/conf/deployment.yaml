@@ -217,7 +217,7 @@ wso2.metrics:
         name: Console
 
         # Enable Console Reporter
-        enabled: true
+        enabled: false
 
         # Polling Period in seconds.
         # This is the period for polling metrics from the metric registry and printing in the console
@@ -236,7 +236,7 @@ wso2.metrics.jdbc:
       # Deleting data older than seven days should be sufficient.
       scheduledCleanup:
         # Enable scheduled cleanup to delete Metrics data in the database.
-        enabled: true
+        enabled: false
 
         # The scheduled job will cleanup all data older than the specified days
         daysToKeep: 7
@@ -252,7 +252,7 @@ wso2.metrics.jdbc:
         name: JDBC
 
         # Enable JDBC Reporter
-        enabled: false
+        enabled: true
 
         # Source of Metrics, which will be used to identify each metric in database -->
         # Commented to use the hostname by default
@@ -272,7 +272,7 @@ wso2.artifact.deployment:
 
   # Periodic Persistence Configuration
 state.persistence:
-  enabled: false
+  enabled: true
   intervalInMin: 1
   revisionsToKeep: 2
   persistenceStore: org.wso2.carbon.stream.processor.core.persistence.FileSystemPersistenceStore
@@ -322,7 +322,7 @@ wso2.datasources:
           jdbcUrl: 'jdbc:mysql://172.28.128.3:3306/WSO2_METRICS_DB?useSSL=false'
           username: root
           password: wso2carbon
-          driverClassName: org.h2.Driver
+          driverClassName: com.mysql.jdbc.Driver
           maxPoolSize: 50
           idleTimeout: 60000
           connectionTestQuery: SELECT 1
@@ -374,7 +374,7 @@ cluster.config:
 #  sourceQueueCapacity: 20000
 #  retryAppSyncPeriod: 60000
 
-  # Sample of deployment.config for Distributed deployment
+# Sample of deployment.config for Distributed deployment
 #deployment.config:
 #  type: distributed
 #  httpInterface:
