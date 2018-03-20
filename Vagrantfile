@@ -73,6 +73,10 @@ Vagrant.configure(2) do |config|
         vb.customize ['modifyvm', :id, '--cpus', cpu]
       end
 
+      if server['conf_dir']
+        server_config.vm.provision "file", source: FILES_PATH + server['conf_dir'], destination: DEFAULT_MOUNT + server['conf_dir']
+      end
+      
       # configure shell provisioner
       if !server['provisioner_script']
         # if not defined, move to next server specification

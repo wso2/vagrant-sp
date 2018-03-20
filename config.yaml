@@ -21,6 +21,7 @@ servers:
     ram: 2048
     cpu: 1
     provisioner_script: mysql/provisioner/db_provisioner.sh
+    conf_dir: mysql/scripts
   -
     hostname: editor
     box: wso2sp
@@ -31,6 +32,7 @@ servers:
     ram: 2048
     cpu: 1
     provisioner_script: editor/provisioner/product_provisioner.sh
+    conf_dir: editor/repository
   -
     hostname: worker
     box: wso2sp
@@ -38,6 +40,7 @@ servers:
     ram: 2048
     cpu: 1
     provisioner_script: worker/provisioner/product_provisioner.sh
+    conf_dir: worker/repository
   -
     hostname: dashboard
     box: wso2sp
@@ -48,3 +51,4 @@ servers:
     ram: 2048
     cpu: 1
     provisioner_script: dashboard/provisioner/product_provisioner.sh
+    conf_dir: dashboard/repository
