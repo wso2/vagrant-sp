@@ -25,7 +25,7 @@ git clone https://github.com/wso2/vagrant-sp.git
 > If you are to try out an already released zip of this repo, please ignore this 1st step.
 
 
-3. Move to `vagrant-sp` folder.
+2. Move to `vagrant-sp` folder.
 
 ```
 cd vagrant-sp
@@ -36,13 +36,13 @@ cd vagrant-sp
 
 
 
-4. Spawn up the Vagrant setup
+3. Spawn up the Vagrant setup
 
 ```
 vagrant up
 ```
 
-5. Access the Status Dashboard and Editor via the given URL
+4. Access the Status Dashboard and Editor via the given URL
 
 ```
 http://172.28.128.7:9390/editor
