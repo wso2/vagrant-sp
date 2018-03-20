@@ -23,8 +23,7 @@ WORKING_DIRECTORY=/home/vagrant
 JAVA_HOME=/opt/java/
 WUM_HOME=/usr/local
 WUM_PATH=PATH=$PATH:/usr/local/wum/bin
-DEFAULT_MOUNT=/vagrant
-CONFIGURATIONS=${DEFAULT_MOUNT}/
+CONFIGURATIONS=${WORKING_DIRECTORY}/
 NODE_IP=$(/sbin/ifconfig eth1 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
 
 # operating in non-interactive mode
@@ -82,9 +81,11 @@ fi
 export JAVA_HOME
 export WUM_HOME
 
+echo "Removing configurations directories."
+rm -rf ${CONFIGURATIONS}
+
 # start the WSO2 product pack as a background service
 echo "Starting ${WSO2_SERVER}-${WSO2_SERVER_VERSION}..."
 nohup ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/wso2/worker/bin/carbon.sh &
 
 sleep 10
-

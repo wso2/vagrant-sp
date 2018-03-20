@@ -19,37 +19,40 @@ Virtualization should be enabled in BIOS settings before building the boxes.
   3. Manager
   4. Worker
 
-## How to run the Vagrantfile
+  ## How to run the Vagrantfile
 
-1.  Follow the instructions in this repository to build the WSO2 Stream Processor 4.0.0 and MYSQL Vagrant boxes.
+  1.  Follow the instructions in this repository to build the WSO2 Stream Processor 4.0.0 and MYSQL Vagrant boxes.
 
-```
-    https://github.com/wso2/vagrant-boxes
-```
+  ```
+  https://github.com/wso2/vagrant-boxes
+  ```
+  > If you are to try out an already released zip of this repo, please ignore this 1st step.
 
-2. Checkout this repository into your local machine using the following Git command.
+  2. Checkout this repository into your local machine using the following Git command.
 
-```
-    git clone https://github.com/wso2/vagrant-sp.git
-```
+  ```
+  git clone https://github.com/wso2/vagrant-sp.git
+  ```
+  >If you are to try out an already released zip of this repo, please ignore this 2nd step also. Instead, extract the zip file and directly browse to `vagrant-sp-<released-version>` folder.
 
-3. Move to `vagrant-sp` folder.
+  >If you are to try out an already released tag, after executing 2nd step, checkout the relevant tag, i.e. for example: <br> git checkout tags/v4.0.0.2 and continue below steps.
 
-```
-    cd vagrant-sp
-```
 
-4. Spawn up the Vagrant setup
+  3. Move to `vagrant-sp` folder.
 
-```
-    vagrant up
-```
+  ```
+  cd vagrant-sp
+  ```
 
-5. Access the Status Dashboard and Editor via the given URL
+  4. Spawn up the Vagrant setup
 
-```
-    http://localhost:9390/editor
-    https://localhost:9743/editor
-    http://localhost:9290/monitoring
-    https://localhost:9643/monitoring
-```
+  ```
+  vagrant up
+  ```
+
+  5. Access the Status Dashboard and Editor via the given URL
+
+  ```
+  http://172.28.128.7:9390/editor
+  https://172.28.128.6:9643/monitoring
+  ```
