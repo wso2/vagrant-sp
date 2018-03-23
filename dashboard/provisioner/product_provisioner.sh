@@ -24,7 +24,7 @@ WORKING_DIRECTORY=/home/vagrant
 JAVA_HOME=/opt/java/
 WUM_HOME=/usr/local
 WUM_PATH=PATH=$PATH:/usr/local/wum/bin
-CONFIGURATIONS=${WORKING_DIRECTORY}/
+CONFIGURATIONS=${WORKING_DIRECTORY}/dashboard/repository
 NODE_IP=$(/sbin/ifconfig eth1 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
 
 # operating in non-interactive mode
@@ -71,7 +71,7 @@ fi
 # copy files with configuration changes
 echo "Copying the files with configuration changes to the server pack..."
 
-cp -TRv ${CONFIGURATIONS}/dashboard/repository/conf/ ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/conf/dashboard
+cp -TRv ${CONFIGURATIONS}/conf/ ${WORKING_DIRECTORY}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}/conf/dashboard
 if [ "$?" -eq "0" ];
 then
   echo "Successfully copied the configuration files."
