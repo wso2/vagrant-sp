@@ -29,6 +29,7 @@ servers:
     ports:
       - 9390
       - 9743
+      - 8006
     ram: 2048
     cpu: 1
     provisioner_script: editor/provisioner/product_provisioner.sh
@@ -37,6 +38,8 @@ servers:
     hostname: worker
     box: wso2sp
     ip: 172.28.128.4
+    ports:
+      - 9443
     ram: 2048
     cpu: 1
     provisioner_script: worker/provisioner/product_provisioner.sh

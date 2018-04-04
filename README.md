@@ -45,6 +45,6 @@ vagrant up
 4. Access the Status Dashboard and Editor via the given URL
 
 ```
-http://172.28.128.7:9390/editor
-https://172.28.128.6:9643/monitoring
+http://localhost:9390/editor
+https://localhost:9643/monitoring
 ````
