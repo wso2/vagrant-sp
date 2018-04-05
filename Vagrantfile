@@ -22,8 +22,8 @@ require 'erb'
 
 # check whether the command is 'vagrant up'
 if ARGV[0] == 'up'
-  print "Please insert your credentials\n"
-  print "WSO2 account username: "
+  print "Please insert your WSO2 credentials\n"
+  print "Username: "
   USERNAME = STDIN.gets.chomp
   print "Password: "
   PASSWORD = STDIN.noecho(&:gets).chomp
@@ -55,7 +55,7 @@ Vagrant.configure(2) do |config|
       # define the virtual machine host name
       server_config.vm.host_name = server['hostname']
 
-      # Diasbling the synched folder
+      # Diasbling the synced folder
       server_config.vm.synced_folder ".", "/vagrant", disabled: true
 
       #generate the url
