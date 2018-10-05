@@ -14,15 +14,12 @@
 
 # set variables
 WSO2_SERVER=wso2sp
-WSO2_SERVER_VERSION=4.2.0
+WSO2_SERVER_VERSION=4.3.0
 WSO2_SERVER_PACK=${WSO2_SERVER}-${WSO2_SERVER_VERSION}*.zip
 MYSQL_CONNECTOR=mysql-connector-java-5.1.*-bin.jar
 JDK_ARCHIVE=jdk-8u*-linux-x64.tar.gz
-WUM_ARCHIVE=wum-1.0-linux-x64.tar.gz
 WORKING_DIRECTORY=/home/vagrant
 JAVA_HOME=/opt/java/
-WUM_HOME=/usr/local
-WUM_PATH=PATH=$PATH:/usr/local/wum/bin
 CONFIGURATIONS=${WORKING_DIRECTORY}/worker/repository
 
 # operating in non-interactive mode
@@ -39,14 +36,6 @@ if test ! -d ${JAVA_HOME}; then
   mkdir ${JAVA_HOME};
   tar -xf ${WORKING_DIRECTORY}/${JDK_ARCHIVE} -C ${JAVA_HOME} --strip-components=1
   echo "Successfully set up Java"
-fi
-
-# set up wum
-echo "Setting up WUM."
-if test ! -d ${WUM_HOME}; then
-  mkdir ${WUM_HOME};
-  tar -xf ${WORKING_DIRECTORY}/${WUM_ARCHIVE} -C ${WUM_HOME} --strip-components=1
-  echo "Successfully set up WUM."
 fi
 
 # unpack the WSO2 product pack to the working directory
@@ -78,7 +67,6 @@ else
 fi
 
 export JAVA_HOME
-export WUM_HOME
 
 echo "Removing configurations directories."
 rm -rf ${CONFIGURATIONS}
