@@ -41,7 +41,7 @@ files:
         xpath: "siddhi.stores.query.api/listenerConfigurations[id=\"msf4j-https\"]/host"
         value: "172.28.128.4"
       - operation: "replace"
-        xpath: "databridge.config/dataReceivers/dataReceiver[type=\"Binary\"]/properties/host"
+        xpath: "databridge.config/dataReceivers/dataReceiver[type=\"Binary\"]/properties/hostName"
         value: "172.28.128.4"
       - operation: "replace"
         xpath: "wso2.metrics/enabled"
