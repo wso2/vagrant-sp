@@ -1,0 +1,157 @@
+# Copyright 2019 WSO2, Inc. (http://wso2.com)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License
+# ----------------------------------------------------------------------
+---
+# command line arguments
+params:
+  existing_version: 4.3.0
+  new_version: 4.4.0
+  wso2sp: "wso2sp-4.4.0"
+# files based configurations
+files:
+#Worker Configuration and Version changes
+  - file_path: "worker/repository/conf/deployment.yaml"
+    relative_path: "{$arg.wso2sp}/conf/worker/deployment.yaml"
+    file_type: "yaml"
+    configurations:
+      - operation: "remove"
+        xpath: "wso2.carbon/type"
+        value: '~'
+      - operation: "replace"
+        xpath: "wso2.transport.http/listenerConfigurations[id=\"default\"]/host"
+        value: "172.28.128.4"
+      - operation: "replace"
+        xpath: "wso2.transport.http/listenerConfigurations[id=\"msf4j-https\"]/host"
+        value: "172.28.128.4"
+      - operation: "replace"
+        xpath: "siddhi.stores.query.api/listenerConfigurations[id=\"default\"]/host"
+        value: "172.28.128.4"
+      - operation: "replace"
+        xpath: "siddhi.stores.query.api/listenerConfigurations[id=\"msf4j-https\"]/host"
+        value: "172.28.128.4"
+      - operation: "replace"
+        xpath: "databridge.config/dataReceivers/dataReceiver[type=\"Binary\"]/properties/host"
+        value: "172.28.128.4"
+      - operation: "replace"
+        xpath: "wso2.metrics/enabled"
+        value: "true"
+      - operation: "replace"
+        xpath: "wso2.metrics.jdbc/dataSource[dataSourceName=\"java:comp/env/jdbc/WSO2MetricsDB\"]/scheduledCleanup/daysToKeep"
+        value: 7
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_CLUSTER_DB\"]/name"
+        value: "WSO2_CARBON_DB"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_CARBON_DB\"]/description"
+        value: "The datasource used for registry and user manager"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_CARBON_DB\"]/definition/configuration/jdbcUrl"
+        value: "jdbc:h2:${sys:carbon.home}/wso2/${sys:wso2.runtime}/database/WSO2_CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_METRICS_DB\"]/definition/configuration/jdbcUrl"
+        value: "jdbc:mysql://172.28.128.3:3306/WSO2_METRICS_DB?useSSL=false"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_METRICS_DB\"]/definition/configuration/username"
+        value: "root"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_METRICS_DB\"]/definition/configuration/driverClassName"
+        value: "com.mysql.cj.jdbc.Driver"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"EI_ANALYTICS\"]/definition/configuration/jdbcUrl"
+        value: "jdbc:h2:${sys:carbon.home}/wso2/dashboard/database/EI_ANALYTICS;AUTO_SERVER=TRUE"
+      - operation: "replace"
+        xpath: "cluster.config/strategyConfig/datasource"
+        value: "WSO2_CARBON_DB"
+      - operation: "replace"
+        xpath: "cluster.config/strategyConfig/heartbeatInterval"
+        value: "1000"
+      - operation: "replace"
+        xpath: "cluster.config/strategyConfig/eventPollingInterval"
+        value: "1000"
+  - file_path: "worker/provisioner/product_provisioner.sh"
+    relative_path: ~
+    file_type: "txt"
+    configurations:
+        - operation: "replace"
+          current_value: "{$arg.existing_version}"
+          new_value: "{$arg.new_version}"
+#Dashboard Configuration and Version changes
+  - file_path: "dashboard/repository/conf/deployment.yaml"
+    relative_path: "{$arg.wso2sp}/conf/dashboard/deployment.yaml"
+    file_type: "yaml"
+    configurations:
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_STATUS_DASHBOARD_DB\"]/definition/configuration/jdbcUrl"
+        value: "jdbc:mysql://172.28.128.3:3306/WSO2_STATUS_DASHBOARD_DB?useSSL=false"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_STATUS_DASHBOARD_DB\"]/definition/configuration/username"
+        value: "root"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_STATUS_DASHBOARD_DB\"]/definition/configuration/driverClassName"
+        value: "com.mysql.cj.jdbc.Driver"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_METRICS_DB\"]/definition/configuration/jdbcUrl"
+        value: "jdbc:mysql://172.28.128.3:3306/WSO2_METRICS_DB?useSSL=false"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_METRICS_DB\"]/definition/configuration/username"
+        value: "root"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_METRICS_DB\"]/definition/configuration/driverClassName"
+        value: "com.mysql.cj.jdbc.Driver"
+      - operation: "replace"
+        xpath: "databridge.config/dataReceivers/dataReceiver[type=\"Binary\"]/properties/hostName"
+        value: "172.28.128.6"
+      - operation: "replace"
+        xpath: "wso2.transport.http/listenerConfigurations[id=default-https]/host"
+        value: "172.28.128.6"
+  - file_path: "dashboard/provisioner/product_provisioner.sh"
+    relative_path: ~
+    file_type: "txt"
+    configurations:
+      - operation: "replace"
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+#Editor Configuration and Version changes
+  - file_path: "editor/repository/conf/deployment.yaml"
+    relative_path: "{$arg.wso2sp}/conf/editor/deployment.yaml"
+    file_type: "yaml"
+    configurations:
+      - operation: "replace"
+        xpath: "wso2.transport.http/listenerConfigurations[id=\"default\"]/host"
+        value: "172.28.128.7"
+      - operation: "replace"
+        xpath: "wso2.transport.http/listenerConfigurations[id=\"msf4j-https\"]/host"
+        value: "172.28.128.7"
+      - operation: "replace"
+        xpath: "siddhi.stores.query.api/listenerConfigurations[id=\"default\"]/host"
+        value: "172.28.128.7"
+      - operation: "replace"
+        xpath: "databridge.config/dataReceivers/dataReceiver[type=\"Binary\"]/properties/hostName"
+        value: "172.28.128.7"
+  - file_path: "editor/provisioner/product_provisioner.sh"
+    relative_path: ~
+    file_type: "txt"
+    configurations:
+      - operation: "replace"
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"#
+#README.md changes
+  - file_path: "README.md"
+    relative_path: ~
+    file_type: "txt"
+    configurations:
+      - operation: "replace"
+        current_value: "v4.3.0.1 "
+        new_value: "v4.4.0.1 "
+
