@@ -15,7 +15,7 @@
 
 # set variables
 WSO2_SERVER=wso2sp
-WSO2_SERVER_VERSION=4.3.0
+WSO2_SERVER_VERSION=4.4.0
 WSO2_SERVER_PACK=${WSO2_SERVER}-${WSO2_SERVER_VERSION}*.zip
 MYSQL_CONNECTOR=mysql-connector-java-*.jar
 JDK_ARCHIVE=jdk-8u*-linux-x64.tar.gz
