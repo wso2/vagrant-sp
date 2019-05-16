@@ -20,7 +20,7 @@ params:
   wso2sp: "wso2sp-4.4.0"
 # files based configurations
 files:
-#Worker Configuration and Version changes
+# worker Configuration and Version changes
   - file_path: "worker/repository/conf/deployment.yaml"
     relative_path: "{$arg.wso2sp}/conf/worker/deployment.yaml"
     file_type: "yaml"
@@ -86,7 +86,7 @@ files:
         - operation: "replace"
           current_value: "{$arg.existing_version}"
           new_value: "{$arg.new_version}"
-#Dashboard Configuration and Version changes
+# dashboard Configuration and Version changes
   - file_path: "dashboard/repository/conf/deployment.yaml"
     relative_path: "{$arg.wso2sp}/conf/dashboard/deployment.yaml"
     file_type: "yaml"
@@ -122,7 +122,7 @@ files:
       - operation: "replace"
         current_value: "{$arg.existing_version}"
         new_value: "{$arg.new_version}"
-#Editor Configuration and Version changes
+# editor Configuration and Version changes
   - file_path: "editor/repository/conf/deployment.yaml"
     relative_path: "{$arg.wso2sp}/conf/editor/deployment.yaml"
     file_type: "yaml"
@@ -146,7 +146,7 @@ files:
       - operation: "replace"
         current_value: "{$arg.existing_version}"
         new_value: "{$arg.new_version}"#
-#README.md changes
+# readme.md changes
   - file_path: "README.md"
     relative_path: ~
     file_type: "txt"
@@ -154,4 +154,3 @@ files:
       - operation: "replace"
         current_value: "v4.3.0.1 "
         new_value: "v4.4.0.1 "
-
