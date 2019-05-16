@@ -17,8 +17,8 @@
 params:
   existing_version: 4.3.0
   new_version: 4.4.0
-  existing_version_sub: 4.3.0.1
-  new_version_sub: 4.4.0.1
+  existing_version_readme: v4.3.0.1
+  new_version_readme: v4.4.0.1
   wso2sp: "wso2sp-4.4.0"
 # files based configurations
 files:
@@ -154,5 +154,5 @@ files:
     file_type: "txt"
     configurations:
       - operation: "replace"
-        current_value: "{$arg.existing_version_sub}"
-        new_value: "{$arg.new_version_sub}"
+        current_value: "{$arg.existing_version_readme}"
+        new_value: "{$arg.new_version_readme}"
